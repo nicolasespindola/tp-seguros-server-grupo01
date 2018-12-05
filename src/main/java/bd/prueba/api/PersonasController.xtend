@@ -1,10 +1,10 @@
 package bd.prueba.api
 
-import org.uqbar.xtrest.api.annotation.Controller
-import org.uqbar.xtrest.json.JSONUtils
-import org.uqbar.xtrest.api.Result
-import org.uqbar.xtrest.api.annotation.Get
 import bd.prueba.conexion.Consultas
+import org.uqbar.xtrest.api.Result
+import org.uqbar.xtrest.api.annotation.Controller
+import org.uqbar.xtrest.api.annotation.Get
+import org.uqbar.xtrest.json.JSONUtils
 
 @Controller
 class PersonasController {
@@ -19,10 +19,9 @@ class PersonasController {
 		} catch (Exception e) {
 			return badRequest("No se encontr� la busqueda. " + e.message)
 		}
-
 	}
 	
-		@Get("/beneficiariosDeClienteParaSeguroDeVida/:id")
+	@Get("/beneficiariosDeClienteParaSeguroDeVida/:id")
 	def Result getbeneficiariosDeVidaDeCliente() {
 		val idValue = Integer.valueOf(id)
 		try {
@@ -31,9 +30,14 @@ class PersonasController {
 		} catch (Exception e) {
 			return badRequest("No se encontr� la busqueda. " + e.message)
 		}
-
 	}
 	
-	
-	
+	@Get("/agentes/reporte")
+	def Result getReporteAgentes() {
+		try {
+			ok("a".toJson)
+		} catch (Exception e) {
+			return badRequest(e.toString())
+		}
+	}
 }

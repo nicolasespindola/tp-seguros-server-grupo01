@@ -60,6 +60,9 @@ class Consultas {
 
 	}
 
+//------------------------------------------------------------------------------------------
+//PERSONAS
+
 	static def Cliente buscarClienteParaCrearSeguroDeVida(int dni) {
 
 		ps = conn.prepareStatement("call mydb.buscarClientePorDniParaCrearSeguroDeVida(?)");
@@ -110,5 +113,10 @@ class Consultas {
 
 		return beneficiarios
 	}
+	
+//------------------------------------------------------------------------------------------
+//AGENTES
+
+	 
 
 }
