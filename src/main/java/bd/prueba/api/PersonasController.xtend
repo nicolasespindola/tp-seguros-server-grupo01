@@ -7,7 +7,7 @@ import org.uqbar.xtrest.api.annotation.Get
 import bd.prueba.conexion.Consultas
 
 @Controller
-class SeguroController {
+class PersonasController {
 	extension JSONUtils = new JSONUtils
 
 	@Get("/buscarClienteParaSeguroVida/:dni")
