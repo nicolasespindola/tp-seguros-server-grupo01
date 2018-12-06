@@ -19,7 +19,7 @@ class Cliente {
 		return new Cliente => [
 			persona = Persona.fromSQL(resultado)
 			fecha_de_nacimiento = resultado.getDate("fecha_de_nacimiento")
-			id_seguro_vinculado = resultado.getInt("id_seguro_vinculado")
+			//id_seguro_vinculado = resultado.getInt("id_seguro_vinculado")
 		]
 	}
 
