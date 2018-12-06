@@ -8,7 +8,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class Conexion {
 	public static Connection cnx = null;
-	public static String contraseniaUno = "creoentuvoz";
+	public static String contraseniaUno = "admin";
 	public static String contraseniaDos = "root";
 
 	def static Connection obtener() throws SQLException,ClassNotFoundException {

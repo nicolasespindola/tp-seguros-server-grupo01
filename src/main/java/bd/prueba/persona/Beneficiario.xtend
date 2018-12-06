@@ -1,16 +1,19 @@
 package bd.prueba.persona
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import java.sql.ResultSet
 
 @Accessors
-class Beneficiario extends Persona {
-	Integer id_vinculo
+class Beneficiario{
+	Persona persona
 	String lazo_o_vinculo
+	Double porcentaje_asignado
 	
-	new(Integer id, String nombre, String direccion, Integer tel, Integer dni, String tipo, String lazo, Integer vinculo) {
-		super(id, nombre, direccion, tel, dni, tipo)
-		this.id_vinculo = vinculo
-		this.lazo_o_vinculo = lazo
+	def static fromSQL(ResultSet rs){
+		return new Beneficiario => [
+			persona = Persona.fromSQL(rs)
+			lazo_o_vinculo = rs.getString("lazo_o_vinculo")
+			porcentaje_asignado = rs.getDouble("porcentaje_asignado")
+		]
 	}
-
 }

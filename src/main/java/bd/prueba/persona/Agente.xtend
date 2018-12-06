@@ -1,7 +1,9 @@
 package bd.prueba.persona
 
 import java.sql.ResultSet
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class Agente extends Persona {
 	Double comision_anual
 	Persona persona
