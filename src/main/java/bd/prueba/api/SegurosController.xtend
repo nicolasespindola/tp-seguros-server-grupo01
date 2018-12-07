@@ -11,6 +11,7 @@ import bd.prueba.servicio.TipoDeCoberturaServicio
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.api.annotation.Body
 import bd.prueba.seguro.SeguroVidaPost
+import bd.prueba.conexion.Consultas
 
 @Controller
 class SegurosController {
@@ -67,4 +68,14 @@ class SegurosController {
 			return badRequest("Hubo un error intentando crear el seguro. " + exception.message)
 		}
 	}
+	@Get("/seguro/traerHome")
+	def Result getSegurosHome() {
+		try {
+			val seguros = Consultas.getSegurosHome()
+			ok(seguros.toJson)
+		} catch (Exception e) {
+			return badRequest("No se encontro la busqueda. " + e.message)
+		}
+	}
+	
 }
