@@ -12,10 +12,9 @@ class PersonasController {
 
 	@Get("/buscarClienteParaSeguroVida/:dni")
 	def Result getClientePorDniSeguroVida() {
-		val dniValue = Integer.valueOf(dni)
 		try {
-			val cliente = Consultas.buscarClienteParaCrearSeguroDeVida(dniValue)
-			ok(cliente.toJson)
+			val dniValue = Integer.valueOf(dni)
+			ok(Consultas.buscarClienteParaCrearSeguroDeVida(dniValue).toJson)
 		} catch (Exception e) {
 			return badRequest("No se encontr� la busqueda. " + e.message)
 		}
@@ -25,8 +24,7 @@ class PersonasController {
 	def Result getbeneficiariosDeVidaDeCliente() {
 		val idValue = Integer.valueOf(id)
 		try {
-			val beneficiarios = Consultas.beneficiariosDeCliente(idValue)
-			ok(beneficiarios.toJson)
+			ok(Consultas.beneficiariosDeCliente(idValue).toJson)
 		} catch (Exception e) {
 			return badRequest("No se encontr� la busqueda. " + e.message)
 		}
@@ -35,9 +33,9 @@ class PersonasController {
 	@Get("/agentes/reporte")
 	def Result getReporteAgentes() {
 		try {
-			ok("a".toJson)
+			ok(Consultas.reporteAgentes().toJson)
 		} catch (Exception e) {
-			return badRequest(e.toString())
+			return badRequest("No fue posible realizar la consulta" + e.toString())
 		}
 	}
 }
