@@ -10,7 +10,7 @@ import org.uqbar.xtrest.json.JSONUtils
 class PersonasController {
 	extension JSONUtils = new JSONUtils
 
-	@Get("/buscarClienteParaSeguroVida/:dni")
+	@Get("/cliente/dni/:dni")
 	def Result getClientePorDniSeguroVida() {
 		try {
 			val dniValue = Integer.valueOf(dni)
