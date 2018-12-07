@@ -72,7 +72,7 @@ class SeguroServicio {
 		val query = "SELECT p.*, b.lazo_o_vinculo, b.porcentaje_asignado  
 					 FROM Beneficiarios as b
 					 JOIN Persona as p
-					 	ON b.ID_Persona = p.ID_Persona
+					 	ON b.id_beneficiario = p.ID_Persona
 					 WHERE b.ID_Seguro_De_Vida = " + idSeguro
 		
 		val stmt = conn.createStatement();

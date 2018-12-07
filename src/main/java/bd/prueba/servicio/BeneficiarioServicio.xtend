@@ -22,7 +22,7 @@ class BeneficiarioServicio {
 		val query = "SELECT *
 					 FROM persona p
 					 LEFT JOIN beneficiarios b
-					 ON p.id_persona = b.id_persona
+					 ON p.id_persona = b.id_beneficiario
 					 WHERE b.id_seguro_de_vida IS NULL
 					 OR b.id_seguro_de_vida <> " + idSeguro
 		
