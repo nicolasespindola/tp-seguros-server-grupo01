@@ -1,6 +1,5 @@
 package bd.prueba.conexion
 
-import bd.prueba.persona.Beneficiario
 import bd.prueba.persona.Cliente
 import bd.prueba.persona.Persona
 import java.sql.Connection
@@ -10,7 +9,6 @@ import java.sql.SQLException
 import java.util.ArrayList
 import java.util.List
 import org.omg.CORBA.UserException
-import bd.prueba.seguro.SeguroVidaTemp
 
 class Consultas {
 	var String selectSQL = "SELECT * FROM mydb.persona ";

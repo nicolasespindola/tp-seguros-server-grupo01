@@ -6,6 +6,8 @@ import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.json.JSONUtils
 import bd.prueba.servicio.SeguroServicio
 import bd.prueba.servicio.BeneficiarioServicio
+import bd.prueba.servicio.OcupacionServicio
+import bd.prueba.servicio.TipoDeCoberturaServicio
 
 @Controller
 class SegurosController {
@@ -26,8 +28,28 @@ class SegurosController {
 	def Result getBeneficiariosPosiblesPorIDSeguro() {
 		val idSeguroDeVida = Integer.valueOf(idSeguro)
 		try {
-			val seguroDeVida = new BeneficiarioServicio().getBeneficiariosPosibles(idSeguroDeVida)
-			ok(seguroDeVida.toJson)
+			val beneficiarios = new BeneficiarioServicio().getBeneficiariosPosibles(idSeguroDeVida)
+			ok(beneficiarios.toJson)
+		} catch (Exception e) {
+			return badRequest("No se encontr� la busqueda. " + e.message)
+		}
+	}
+	
+	@Get("/ocupaciones/all")
+	def Result getOcupaciones(){
+		try {
+			val ocupaciones = new OcupacionServicio().getAll()
+			ok(ocupaciones.toJson)
+		} catch (Exception e) {
+			return badRequest("No se encontr� la busqueda. " + e.message)
+		}
+	}
+	
+	@Get("/coberturas/all")
+	def Result getTiposDeCoberturas(){
+		try {
+			val coberturas = new TipoDeCoberturaServicio().getAll()
+			ok(coberturas.toJson)
 		} catch (Exception e) {
 			return badRequest("No se encontr� la busqueda. " + e.message)
 		}

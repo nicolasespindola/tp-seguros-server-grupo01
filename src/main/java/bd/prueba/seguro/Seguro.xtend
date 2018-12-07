@@ -1,21 +1,35 @@
 package bd.prueba.seguro
 
-import java.time.LocalDateTime
-import java.sql.Date
-import org.eclipse.xtend.lib.annotations.Accessors
-import java.sql.ResultSet
 import bd.prueba.persona.Cliente
+import java.sql.Date
+import java.sql.ResultSet
+import org.eclipse.xtend.lib.annotations.Accessors
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 @Accessors
 class Seguro {
+	@JsonIgnore DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	Cliente cliente
 	int id_seguro
 	int id_agente
-	String estado
-	Date fecha_inicio
-	Date fecha_vencimiento
+	String estado	
+	@JsonIgnore Date fecha_inicio
+	@JsonIgnore Date fecha_vencimiento
 	double prima
 	String tipo
+	
+	@JsonProperty("fecha_inicio")
+	def _fecha_inicio(){
+		return dateFormat.format(fecha_inicio)
+	}
+	
+	@JsonProperty("fecha_vencimiento")
+	def _fecha_vencimiento(){
+		return dateFormat.format(fecha_vencimiento)
+	}
 	
 	def static fromSQL(ResultSet rs) {
 		return new Seguro => [
