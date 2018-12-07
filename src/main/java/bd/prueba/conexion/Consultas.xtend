@@ -1,6 +1,5 @@
 package bd.prueba.conexion
 
-import bd.prueba.persona.Beneficiario
 import bd.prueba.persona.Cliente
 import bd.prueba.persona.Persona
 import java.sql.Connection
@@ -10,7 +9,6 @@ import java.sql.SQLException
 import java.util.ArrayList
 import java.util.List
 import org.omg.CORBA.UserException
-import bd.prueba.seguro.SeguroVidaTemp
 
 class Consultas {
 	var String selectSQL = "SELECT * FROM mydb.persona ";
@@ -77,8 +75,6 @@ class Consultas {
 	}
 
 	static def List<Persona> beneficiariosDeSeguro(int seguro) {
-		System.out.println("entro aca")
-
 		ps = conn.prepareStatement("call mydb.beneficiariosDeSeguro(?)");
 		ps.setInt(1, seguro)
 		val List<Persona> beneficiarios = new ArrayList
@@ -95,8 +91,6 @@ class Consultas {
 	}
 
 	static def List<Persona> beneficiariosDeCliente(int idCliente) {
-		System.out.println("entro aca")
-
 		ps = conn.prepareStatement("call mydb.buscarBeneficiariosDeCliente(?)");
 		ps.setInt(1, idCliente)
 		val List<Persona> beneficiarios = new ArrayList
@@ -116,6 +110,19 @@ class Consultas {
 //------------------------------------------------------------------------------------------
 //AGENTES
 
-	 
+	 def static List<Reporte> reporteAgentes(){
+	 	ps = conn.prepareStatement("call mydb.reporteAgentes");
+	 	val List<Reporte> reporteAgentes = new ArrayList()
+	 	val ResultSet resultado = ps.executeQuery()
+		while (resultado.next()) {
+			try {
+				reporteAgentes.add(Reporte.fromSQL(resultado))
+			} catch (UserException e) {
+				System.out.println(e.message)
+			}
+		}
+	 	
+	 	return reporteAgentes
+	 }
 
 }

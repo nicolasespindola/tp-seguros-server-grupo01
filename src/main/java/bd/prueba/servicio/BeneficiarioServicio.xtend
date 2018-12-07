@@ -1,17 +1,10 @@
 package bd.prueba.servicio
 
 import bd.prueba.conexion.Conexion
-import bd.prueba.persona.Beneficiario
-import bd.prueba.persona.Cliente
-import bd.prueba.persona.Ocupacion
-import bd.prueba.seguro.Cobertura
-import bd.prueba.seguro.Seguro
-import bd.prueba.seguro.SeguroDeVida
-import bd.prueba.seguro.SeguroVidaTemp
+import bd.prueba.persona.Persona
 import java.sql.Connection
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
-import bd.prueba.persona.Persona
 
 @Accessors
 class BeneficiarioServicio {
