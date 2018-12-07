@@ -11,6 +11,11 @@ import bd.prueba.seguro.SeguroVidaTemp
 import java.sql.Connection
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
+import bd.prueba.seguro.SeguroVidaPost
+import java.sql.Statement
+import java.sql.ResultSet
+import java.sql.SQLException
+import java.util.Locale
 
 @Accessors
 class SeguroServicio {
@@ -164,4 +169,41 @@ class SeguroServicio {
 		
 		return cliente	
 	}
+	
+	def crearSeguro(SeguroVidaPost post) {		
+		val Connection conn = Conexion.obtener();
+		var ps = conn.prepareStatement("call mydb.InsertSeguroDeVida(?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+		
+		ps.setInt(1, post.id_cliente)
+		ps.setInt(2, post.id_agente)
+		ps.setString(3, post.fecha_inicio)
+		ps.setString(4, post.fecha_vencimiento)
+		ps.setDouble(5, post.prima)
+		ps.setDouble(6, post.suma_asegurada)
+		ps.setInt(7, post.id_tipo_de_cobertura)
+		ps.setInt(8, post.id_ocupacion)
+		
+		ps.executeUpdate()
+		
+		var rs = ps.executeQuery("SELECT LAST_INSERT_ID();")
+		if(post.beneficiarios.length > 0 && rs.next()){
+			val idSeguroNuevo = rs.getInt(1)
+			
+			try{
+				val stringBuild = new StringBuilder()
+				post.beneficiarios.forEach([beneficiario | stringBuild.append(String.format(Locale.US,"(%d, %d, %.2f, '%s'), \n", idSeguroNuevo, beneficiario.persona.id_persona, beneficiario.porcentaje_asignado, beneficiario.lazo_o_vinculo))])
+				var strValues = stringBuild.toString()
+				strValues = strValues.substring(0, strValues.length() - 3)
+				ps.executeUpdate("INSERT INTO beneficiarios VALUES " + strValues)
+			}
+			catch(Exception e){
+				System.out.println(e.message)
+			}
+			return idSeguroNuevo
+		}
+		else{
+			throw new Exception("No se pudo recuperar el ID del seguro generado")
+		}
+	}
+	
 }

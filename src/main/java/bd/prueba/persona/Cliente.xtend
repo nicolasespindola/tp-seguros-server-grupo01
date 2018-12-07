@@ -18,7 +18,7 @@ class Cliente {
 	def static fromSQL(ResultSet resultado) {
 		return new Cliente => [
 			persona = Persona.fromSQL(resultado)
-			fecha_de_nacimiento = resultado.getDate("`Fecha_De_Nacimiento`")
+			fecha_de_nacimiento = resultado.getDate("Fecha_De_Nacimiento")
 			//id_seguro_vinculado = resultado.getInt("id_seguro_vinculado")
 		]
 	}

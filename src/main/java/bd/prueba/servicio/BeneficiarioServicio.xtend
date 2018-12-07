@@ -8,7 +8,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class BeneficiarioServicio {
-	def getBeneficiariosPosibles(int idSeguro) {
+	def getBeneficiariosPosibles() {
 		val Connection conn = Conexion.obtener();
 		var Set<Persona> posiblesBeneficiarios = newHashSet()
 		
