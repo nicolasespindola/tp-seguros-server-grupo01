@@ -24,9 +24,30 @@ class Seguro {
 			estado = rs.getString("descripcion")
 			fecha_inicio = rs.getDate("fecha_inicio")
 			fecha_vencimiento = rs.getDate("fecha_vencimiento")
-			prima = rs.getInt("prima")
+			prima = rs.getDouble("prima")
 			tipo = rs.getString("tipo")
 		]
 	}
 	
+}
+@Accessors
+class SeguroShort{
+	int id_seguro
+	String nombreCliente
+	Date fecha_inicio
+	Date fecha_vencimiento
+	double prima
+	String tipo_de_cobertura
+	String estado
+	def static fromSQL(ResultSet rs) {
+		return new SeguroShort => [
+			id_seguro = rs.getInt("id_seguro")
+			nombreCliente=rs.getString("nombre")
+			fecha_inicio = rs.getDate("fecha_inicio")
+			fecha_vencimiento = rs.getDate("fecha_vencimiento")
+			prima = rs.getDouble("prima")
+			tipo_de_cobertura = rs.getString("tipo_de_cobertura")
+			estado = rs.getString("Estado")
+		]
+	}
 }
